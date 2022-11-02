@@ -1,0 +1,36 @@
+{
+  "name": "@hodfords/nestjs-exception",
+  "version": "1.0.22",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "postbuild": "cp package.json dist/package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hodfords-community/nestjs-exception.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hodfords-community/nestjs-exception/issues"
+  },
+  "homepage": "https://github.com/hodfords-community/nestjs-exception#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@nestjs/common": "8.0.5",
+    "@nestjs/core": "8.0.5",
+    "@types/node": "^16.6.1",
+    "commander": "^8.1.0",
+    "lodash": "^4.17.21",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.3.0",
+    "typescript": "^4.3.5",
+    "@hodfords/nestjs-cls-translation": "1.0.27",
+    "typeorm": "0.2.37"
+  }
+}
