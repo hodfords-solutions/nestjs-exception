@@ -1,6 +1,6 @@
 {
   "name": "@hodfords/nestjs-exception",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hodfords-community/nestjs-exception.git"
+    "url": "git+https://github.com/hodfords-solutions/nestjs-exception.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hodfords-community/nestjs-exception/issues"
+    "url": "https://github.com/hodfords-solutions/nestjs-exception/issues"
   },
-  "homepage": "https://github.com/hodfords-community/nestjs-exception#readme",
+  "homepage": "https://github.com/hodfords-solutions/nestjs-exception#readme",
   "dependencies": {},
   "devDependencies": {
     "@nestjs/common": "8.0.5",
