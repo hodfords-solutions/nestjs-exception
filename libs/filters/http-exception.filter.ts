@@ -17,6 +17,7 @@ import { trans } from '@hodfords/nestjs-cls-translation';
 @Catch()
 export class HttpExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
     protected isMicroservice: boolean = false;
+    protected isGrpc: boolean = false;
 
     catch(exception, host: ArgumentsHost) {
         let language = this.getLanguage(host);
@@ -28,7 +29,7 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
             };
             return this.catchBadRequestWithArgs(host, 'error.field_malformed', language, args);
         } else if (exception instanceof ValidateException) {
-            return new ValidatorExceptionFilter(this.isMicroservice).catch(exception, host);
+            return new ValidatorExceptionFilter(this.isMicroservice, this.isGrpc).catch(exception, host);
         } else if (exception instanceof PayloadTooLargeException) {
             return this.catchPayloadTooLargeException(host, 'error.multer.file_too_large', language);
         } else if (exception.type === 'entity.too.large') {
