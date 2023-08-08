@@ -7,9 +7,10 @@ import { trans } from '@hodfords/nestjs-cls-translation';
 
 @Catch()
 export class ValidatorExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
-    constructor(isMicroservice: boolean) {
+    constructor(isMicroservice: boolean, isGrpc: boolean) {
         super();
         this.isMicroservice = isMicroservice;
+        this.isGrpc = isGrpc;
     }
 
     catch(exception: ValidateException, host: ArgumentsHost) {
