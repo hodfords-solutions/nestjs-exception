@@ -1,6 +1,6 @@
 {
     "name": "@hodfords/nestjs-exception",
-    "version": "1.0.24",
+    "version": "8.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
