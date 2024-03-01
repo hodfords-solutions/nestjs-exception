@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { isString } from '@nestjs/common/utils/shared.utils';
-import { ValidationErrorException } from '../types/validation-error-exception.type';
-import { ValidationErrorExceptionDetail } from '../types/validation-error-exception-detail.type';
 import { ValidationError } from '../interfaces/validation-error.interface';
+import { ValidationErrorExceptionDetail } from '../types/validation-error-exception-detail.type';
+import { ValidationErrorException } from '../types/validation-error-exception.type';
 
 export class ValidateException extends HttpException {
     constructor(errors: ValidationError[]) {
@@ -10,7 +10,10 @@ export class ValidateException extends HttpException {
         this['response' as any] = this.convertValidationErrors(errors);
     }
 
-    private convertValidationErrors(errors: ValidationError[], parent: ValidationError = null): Record<string, ValidationErrorException> {
+    private convertValidationErrors(
+        errors: ValidationError[],
+        parent: ValidationError = null
+    ): Record<string, ValidationErrorException> {
         let newErrors = {};
         errors.forEach((error) => {
             if (!parent || error.property !== parent.property) {
