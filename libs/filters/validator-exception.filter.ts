@@ -1,16 +1,17 @@
-import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { BaseExceptionFilter } from './base-exception.filter';
-import { I18nService } from 'nestjs-i18n';
-import { ValidateException } from '../exceptions/validate.exception';
-import { startCase } from 'lodash';
 import { trans } from '@hodfords/nestjs-cls-translation';
+import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
+import { startCase } from 'lodash';
+import { ValidateException } from '../exceptions/validate.exception';
+import { BaseExceptionFilter } from './base-exception.filter';
 
 @Catch()
 export class ValidatorExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
-    constructor(isMicroservice: boolean, isGrpc: boolean) {
+    constructor(
+        isMicroservice: boolean,
+        public responseError: (host: ArgumentsHost, code, message, errors) => void
+    ) {
         super();
         this.isMicroservice = isMicroservice;
-        this.isGrpc = isGrpc;
     }
 
     catch(exception: ValidateException, host: ArgumentsHost) {
