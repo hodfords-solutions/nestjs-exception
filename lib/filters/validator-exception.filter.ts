@@ -8,23 +8,23 @@ import { BaseExceptionFilter } from './base-exception.filter';
 export class ValidatorExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
     constructor(
         isMicroservice: boolean,
-        public responseError: (host: ArgumentsHost, code, message, errors) => void
+        public responseError: (host: ArgumentsHost, code: number, message: string, errors: string | object) => void
     ) {
         super();
         this.isMicroservice = isMicroservice;
     }
 
-    catch(exception: ValidateException, host: ArgumentsHost) {
-        let language = this.getLanguage(host);
-        let response = exception.getResponse();
+    catch(exception: ValidateException, host: ArgumentsHost): void {
+        const language = this.getLanguage(host);
+        const response = exception.getResponse();
         this.convertValidationErrors(response, language);
         return this.responseError(host, exception.getStatus(), exception.message, exception.getResponse());
     }
 
-    convertValidationErrors(validatorError, language: string) {
-        for (let key of Object.keys(validatorError)) {
-            let messages = [];
-            for (let message of validatorError[key].messages) {
+    convertValidationErrors(validatorError, language: string): void {
+        for (const key of Object.keys(validatorError)) {
+            const messages = [];
+            for (const message of validatorError[key].messages) {
                 messages.push(this.getValidationMessage(message, language));
             }
             validatorError[key].messages = messages;
@@ -34,10 +34,10 @@ export class ValidatorExceptionFilter extends BaseExceptionFilter implements Exc
         }
     }
 
-    getValidationMessage(validatorMessage, language: string) {
+    getValidationMessage(validatorMessage, language: string): string {
         let translateMessage = '';
         let args = {};
-        let key = `validation.${validatorMessage?.message || validatorMessage}`;
+        const key = `validation.${validatorMessage?.message || validatorMessage}`;
 
         if (typeof validatorMessage === 'object') {
             args = { ...validatorMessage.detail, property: startCase(validatorMessage.detail.property) };
