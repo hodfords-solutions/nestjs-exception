@@ -17,8 +17,8 @@ import { ValidatorExceptionFilter } from './validator-exception.filter';
 export class HttpExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
     protected isMicroservice: boolean = false;
 
-    catch(exception, host: ArgumentsHost) {
-        let language = this.getLanguage(host);
+    catch(exception, host: ArgumentsHost): void {
+        const language = this.getLanguage(host);
         if (exception instanceof EntityNotFoundError) {
             return this.catchEntityNotFound(exception, host);
         } else if (exception instanceof UuidException) {
@@ -41,17 +41,17 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
         }
     }
 
-    catchAnotherException(exception, host: ArgumentsHost) {
+    catchAnotherException(exception, host: ArgumentsHost): void {
         console.error(exception);
-        let language = this.getLanguage(host);
-        let message = trans('error.an_error_occurred', { lang: language });
+        const language = this.getLanguage(host);
+        const message = trans('error.an_error_occurred', { lang: language });
         return this.responseError(host, HttpStatus.INTERNAL_SERVER_ERROR, message);
     }
 
-    catchHttpException(exception, host: ArgumentsHost, language: string) {
+    catchHttpException(exception, host: ArgumentsHost, language: string): void {
         const response = exception.getResponse();
-        if (response && response.translate) {
-            let message = trans(response.translate, {
+        if (response?.translate) {
+            const message = trans(response.translate, {
                 lang: language,
                 args: response.args
             });
@@ -63,7 +63,7 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
         }
     }
 
-    catchEntityNotFound(exception, host: ArgumentsHost) {
+    catchEntityNotFound(exception, host: ArgumentsHost): void {
         const messageRegex = /"[a-zA-Z]+"/.exec(exception.message);
         let message = exception.message;
         if (messageRegex) {
@@ -78,15 +78,15 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
         );
     }
 
-    catchBadRequestWithArgs(host: ArgumentsHost, messageKey: string, language: string, args: any) {
-        let message = trans(messageKey, {
+    catchBadRequestWithArgs(host: ArgumentsHost, messageKey: string, language: string, args: { field: string }): void {
+        const message = trans(messageKey, {
             lang: language,
             args
         });
         return this.responseError(host, HttpStatus.BAD_REQUEST, message);
     }
 
-    catchPayloadTooLargeException(host: ArgumentsHost, messageKey: string, language: string) {
+    catchPayloadTooLargeException(host: ArgumentsHost, messageKey: string, language: string): void {
         const message = trans(messageKey, { lang: language });
         return this.responseError(host, HttpStatus.PAYLOAD_TOO_LARGE, message);
     }

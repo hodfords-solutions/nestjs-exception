@@ -14,9 +14,6 @@
     "baseUrl": "./",
     "incremental": true
   },
-  "include": [
-    "libs"
-  ],
   "exclude": [
     "tests",
     "src",
