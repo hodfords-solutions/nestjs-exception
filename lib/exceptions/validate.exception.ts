@@ -14,7 +14,7 @@ export class ValidateException extends HttpException {
         errors: ValidationError[],
         parent: ValidationError = null
     ): Record<string, ValidationErrorException> {
-        let newErrors = {};
+        const newErrors = {};
         errors.forEach((error) => {
             if (!parent || error.property !== parent.property) {
                 newErrors[error.property] = this.convertValidationError(error);
@@ -24,7 +24,7 @@ export class ValidateException extends HttpException {
     }
 
     private convertValidationError(error: ValidationError): ValidationErrorException {
-        let newError: ValidationErrorException = {
+        const newError: ValidationErrorException = {
             children: undefined,
             messages: []
         };
