@@ -1,6 +1,6 @@
 {
     "name": "@hodfords/nestjs-exception",
-    "version": "11.0.1",
+    "version": "11.0.2",
     "description": "A NestJS module for handling and customizing exceptions with ease.",
     "scripts": {
         "prebuild": "rimraf dist",
@@ -24,8 +24,10 @@
         "url": "https://github.com/hodfords-solutions/nestjs-exception/issues"
     },
     "homepage": "https://github.com/hodfords-solutions/nestjs-exception#readme",
+    "dependencies": {
+        "@grpc/grpc-js": "1.13.0"
+    },
     "devDependencies": {
-        "@grpc/grpc-js": "1.13.0",
         "@hodfords/nestjs-cls-translation": "11.0.2",
         "@hodfords/nestjs-eslint-config": "11.0.1",
         "@hodfords/nestjs-prettier-config": "11.0.1",
