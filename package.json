@@ -1,6 +1,6 @@
 {
     "name": "@hodfords/nestjs-exception",
-    "version": "11.0.0",
+    "version": "11.0.1",
     "description": "A NestJS module for handling and customizing exceptions with ease.",
     "scripts": {
         "prebuild": "rimraf dist",
@@ -25,24 +25,25 @@
     },
     "homepage": "https://github.com/hodfords-solutions/nestjs-exception#readme",
     "devDependencies": {
-        "@grpc/grpc-js": "1.12.6",
-        "@hodfords/nestjs-cls-translation": "11.0.0",
-        "@hodfords/nestjs-eslint-config": "11.0.0",
-        "@hodfords/nestjs-prettier-config": "11.0.0",
-        "@nestjs/cli": "11.0.2",
-        "@nestjs/common": "11.0.8",
-        "@nestjs/core": "11.0.8",
-        "@types/node": "22.13.1",
-        "cspell": "8.17.3",
-        "eslint": "9.20.0",
+        "@grpc/grpc-js": "1.13.0",
+        "@hodfords/nestjs-cls-translation": "11.0.2",
+        "@hodfords/nestjs-eslint-config": "11.0.1",
+        "@hodfords/nestjs-prettier-config": "11.0.1",
+        "@nestjs/cli": "11.0.5",
+        "@nestjs/common": "11.0.11",
+        "@nestjs/platform-express": "^11.0.11",
+        "@nestjs/core": "11.0.11",
+        "@types/node": "22.13.10",
+        "cspell": "8.17.5",
+        "eslint": "9.22.0",
         "express": "4.21.2",
         "husky": "9.1.7",
         "is-ci": "4.1.0",
-        "lint-staged": "15.4.3",
+        "lint-staged": "15.5.0",
         "lodash": "4.17.21",
         "rimraf": "6.0.1",
-        "rxjs": "7.8.1",
-        "typeorm": "0.3.20",
-        "typescript": "5.7.3"
+        "rxjs": "7.8.2",
+        "typeorm": "0.3.21",
+        "typescript": "5.8.2"
     }
 }
