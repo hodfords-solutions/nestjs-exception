@@ -18,6 +18,10 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
     protected isMicroservice: boolean = false;
 
     catch(exception, host: ArgumentsHost): void {
+        if ((host.getType() as string) === 'rmq') {
+            // For RMQ, we will let the exception propagate to the global filter, which will handle it and send an appropriate response back to the client.
+            return;
+        }
         const language = this.getLanguage(host);
         if (exception instanceof EntityNotFoundError) {
             return this.catchEntityNotFound(exception, host);

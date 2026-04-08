@@ -1,6 +1,6 @@
 {
     "name": "@hodfords/nestjs-exception",
-    "version": "11.0.3",
+    "version": "11.0.4",
     "description": "A NestJS module for handling and customizing exceptions with ease.",
     "scripts": {
         "prebuild": "rimraf dist",
