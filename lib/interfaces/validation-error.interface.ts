@@ -1,4 +1,4 @@
-import { ValidationErrorExceptionMessage } from '../types/validation-error-exception-message.type';
+import { ValidationErrorExceptionMessage } from '../types/validation-error-exception-message.type.js';
 
 export interface ValidationError {
     target?: Record<string, any>;

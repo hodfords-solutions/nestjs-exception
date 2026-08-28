@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { isString } from '@nestjs/common/utils/shared.utils';
-import { ValidationError } from '../interfaces/validation-error.interface';
-import { ValidationErrorExceptionDetail } from '../types/validation-error-exception-detail.type';
-import { ValidationErrorException } from '../types/validation-error-exception.type';
+import { ValidationError } from '../interfaces/validation-error.interface.js';
+import { ValidationErrorExceptionDetail } from '../types/validation-error-exception-detail.type.js';
+import { ValidationErrorException } from '../types/validation-error-exception.type.js';
 
 export class ValidateException extends HttpException {
     constructor(errors: ValidationError[]) {
