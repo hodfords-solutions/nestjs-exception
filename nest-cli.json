@@ -5,12 +5,9 @@
     "compilerOptions": {
         "assets": [
             {
-                "include": "sample/**/*",
-                "outDir": "dist/sample"
-            },
-            {
-                "include": "lib/**/*",
-                "outDir": "dist/lib"
+                "include": "sample/**/*.json",
+                "outDir": "dist",
+                "watchAssets": true
             }
         ]
     }
