@@ -1,16 +1,19 @@
 import { Module } from '@nestjs/common';
 import { HeaderResolver } from 'nestjs-i18n';
 import path from 'path';
-import { HttpExceptionFilter } from '../lib';
+import { fileURLToPath } from 'url';
+import { HttpExceptionFilter } from '../lib/index.js';
 
 import { RequestResolver, TranslationModule } from '@hodfords/nestjs-cls-translation';
 import { APP_FILTER } from '@nestjs/core';
-import { AppController } from './app.controller';
+import { AppController } from './app.controller.js';
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 const i18nConfig = TranslationModule.forRoot({
     fallbackLanguage: 'en',
     loaderOptions: {
-        path: path.join(__dirname, 'i18n/'),
+        path: path.join(currentDir, 'i18n/'),
         watch: true
     },
     resolvers: [new HeaderResolver(['language'])],

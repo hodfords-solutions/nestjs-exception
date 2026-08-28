@@ -8,10 +8,10 @@ import {
     PayloadTooLargeException
 } from '@nestjs/common';
 import { EntityNotFoundError } from 'typeorm';
-import { UuidException } from '../exceptions/uuid.exception';
-import { ValidateException } from '../exceptions/validate.exception';
-import { BaseExceptionFilter } from './base-exception.filter';
-import { ValidatorExceptionFilter } from './validator-exception.filter';
+import { UuidException } from '../exceptions/uuid.exception.js';
+import { ValidateException } from '../exceptions/validate.exception.js';
+import { BaseExceptionFilter } from './base-exception.filter.js';
+import { ValidatorExceptionFilter } from './validator-exception.filter.js';
 
 @Catch()
 export class HttpExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {

@@ -1,5 +1,5 @@
 import { ArgumentsHost, Catch } from '@nestjs/common';
-import { HttpExceptionFilter } from './http-exception.filter';
+import { HttpExceptionFilter } from './http-exception.filter.js';
 import { Observable, throwError } from 'rxjs';
 
 @Catch()

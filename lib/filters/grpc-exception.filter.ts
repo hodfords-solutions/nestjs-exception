@@ -1,7 +1,7 @@
 import { status } from '@grpc/grpc-js';
 import { ArgumentsHost, Catch } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
-import { HttpExceptionFilter } from './http-exception.filter';
+import { HttpExceptionFilter } from './http-exception.filter.js';
 
 @Catch()
 export class GrpcExceptionFilter extends HttpExceptionFilter {

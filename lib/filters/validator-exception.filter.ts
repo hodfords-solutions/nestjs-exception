@@ -1,8 +1,10 @@
 import { trans } from '@hodfords/nestjs-cls-translation';
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { startCase } from 'lodash';
-import { ValidateException } from '../exceptions/validate.exception';
-import { BaseExceptionFilter } from './base-exception.filter';
+import lodash from 'lodash';
+import { ValidateException } from '../exceptions/validate.exception.js';
+import { BaseExceptionFilter } from './base-exception.filter.js';
+
+const { startCase } = lodash;
 
 @Catch()
 export class ValidatorExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {

@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { UuidException, ValidateFieldException } from '../lib';
+import { UuidException, ValidateFieldException } from '../lib/index.js';
 
 @Controller()
 export class AppController {
