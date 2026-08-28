@@ -1,6 +1,6 @@
 {
     "name": "@hodfords/nestjs-exception",
-    "version": "12.0.1",
+    "version": "12.0.2",
     "description": "A NestJS module for handling and customizing exceptions with ease.",
     "type": "module",
     "main": "./index.js",
@@ -19,7 +19,7 @@
     "scripts": {
         "prebuild": "rimraf dist",
         "build": "tsc",
-        "start:dev": "npm run prebuild && nest start --watch",
+        "start:dev": "npm run prebuild && nest start --watch -p tsconfig.sample.json",
         "postbuild": "cp package.json dist/lib && cp README.md dist/lib && cp .npmrc dist/lib",
         "prepare": "is-ci || husky",
         "format": "prettier --write \"lib/**/*.ts\"",
@@ -46,7 +46,7 @@
         "es-toolkit": "1.51.0"
     },
     "devDependencies": {
-        "@hodfords/nestjs-cls-translation": "11.1.0",
+        "@hodfords/nestjs-cls-translation": "12.0.0",
         "@hodfords/nestjs-eslint-config": "11.0.2",
         "@hodfords/nestjs-prettier-config": "11.0.1",
         "@nestjs/cli": "12.0.0",
@@ -68,5 +68,11 @@
         "typescript": "5.9.3",
         "unplugin-swc": "^1.5.7",
         "vitest": "^4.1.10"
+    },
+    "overrides": {
+        "nestjs-cls": {
+            "@nestjs/common": "$@nestjs/common",
+            "@nestjs/core": "$@nestjs/core"
+        }
     }
 }
