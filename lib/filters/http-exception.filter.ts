@@ -17,7 +17,7 @@ import { ValidatorExceptionFilter } from './validator-exception.filter.js';
 export class HttpExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
     protected isMicroservice: boolean = false;
 
-    catch(exception, host: ArgumentsHost): void {
+    catch(exception: any, host: ArgumentsHost): void {
         if ((host.getType() as string) === 'rmq') {
             // For RMQ, we will let the exception propagate to the global filter, which will handle it and send an appropriate response back to the client.
             return;
@@ -45,15 +45,15 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
         }
     }
 
-    catchAnotherException(exception, host: ArgumentsHost): void {
+    catchAnotherException(exception: unknown, host: ArgumentsHost): void {
         console.error(exception);
         const language = this.getLanguage(host);
         const message = trans('error.an_error_occurred', { lang: language });
         return this.responseError(host, HttpStatus.INTERNAL_SERVER_ERROR, message);
     }
 
-    catchHttpException(exception, host: ArgumentsHost, language: string): void {
-        const response = exception.getResponse();
+    catchHttpException(exception: HttpException, host: ArgumentsHost, language: string): void {
+        const response = exception.getResponse() as { translate?: string; args?: Record<string, unknown> };
         if (response?.translate) {
             const message = trans(response.translate, {
                 lang: language,
@@ -67,7 +67,7 @@ export class HttpExceptionFilter extends BaseExceptionFilter implements Exceptio
         }
     }
 
-    catchEntityNotFound(exception, host: ArgumentsHost): void {
+    catchEntityNotFound(exception: EntityNotFoundError, host: ArgumentsHost): void {
         const messageRegex = /"[a-zA-Z]+"/.exec(exception.message);
         let message = exception.message;
         if (messageRegex) {

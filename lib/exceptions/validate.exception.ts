@@ -1,20 +1,20 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { isString } from '@nestjs/common/utils/shared.utils.js';
 import { ValidationError } from '../interfaces/validation-error.interface.js';
-import { ValidationErrorExceptionDetail } from '../types/validation-error-exception-detail.type.js';
+import { ValidationErrorExceptionMessage } from '../types/validation-error-exception-message.type.js';
 import { ValidationErrorException } from '../types/validation-error-exception.type.js';
 
 export class ValidateException extends HttpException {
     constructor(errors: ValidationError[]) {
         super({}, HttpStatus.UNPROCESSABLE_ENTITY);
-        this['response' as any] = this.convertValidationErrors(errors);
+        (this as unknown as { response: unknown }).response = this.convertValidationErrors(errors);
     }
 
     private convertValidationErrors(
         errors: ValidationError[],
-        parent: ValidationError = null
+        parent: ValidationError | null = null
     ): Record<string, ValidationErrorException> {
-        const newErrors = {};
+        const newErrors: Record<string, ValidationErrorException> = {};
         errors.forEach((error) => {
             if (!parent || error.property !== parent.property) {
                 newErrors[error.property] = this.convertValidationError(error);
@@ -29,7 +29,7 @@ export class ValidateException extends HttpException {
             messages: []
         };
         if (error.constraints) {
-            newError.messages = Object.values(error.constraints).map((message: ValidationErrorExceptionDetail) => {
+            newError.messages = Object.values(error.constraints).map((message: ValidationErrorExceptionMessage) => {
                 if (isString(message)) {
                     return {
                         message,

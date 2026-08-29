@@ -7,7 +7,12 @@ export abstract class BaseExceptionFilter {
         return host.switchToHttp().getRequest().i18nLang;
     }
 
-    protected responseError(host: ArgumentsHost, code: number, message: string, errors: string | object = null): void {
+    protected responseError(
+        host: ArgumentsHost,
+        code: number,
+        message: string,
+        errors: string | object | null = null
+    ): void {
         const ctx = host.switchToHttp();
         ctx.getResponse().status(code).json({
             message: message,
