@@ -3,6 +3,8 @@ import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { startCase } from 'es-toolkit';
 import { ValidateException } from '../exceptions/validate.exception.js';
 import { BaseExceptionFilter } from './base-exception.filter.js';
+import { ValidationErrorException } from '../types/validation-error-exception.type.js';
+import { ValidationErrorExceptionMessage } from '../types/validation-error-exception-message.type.js';
 
 @Catch()
 export class ValidatorExceptionFilter extends BaseExceptionFilter implements ExceptionFilter {
@@ -16,14 +18,14 @@ export class ValidatorExceptionFilter extends BaseExceptionFilter implements Exc
 
     catch(exception: ValidateException, host: ArgumentsHost): void {
         const language = this.getLanguage(host);
-        const response = exception.getResponse();
+        const response = exception.getResponse() as Record<string, ValidationErrorException>;
         this.convertValidationErrors(response, language);
         return this.responseError(host, exception.getStatus(), exception.message, exception.getResponse());
     }
 
-    convertValidationErrors(validatorError, language: string): void {
+    convertValidationErrors(validatorError: Record<string, ValidationErrorException>, language: string): void {
         for (const key of Object.keys(validatorError)) {
-            const messages = [];
+            const messages: string[] = [];
             for (const message of validatorError[key].messages) {
                 messages.push(this.getValidationMessage(message, language));
             }
@@ -34,16 +36,17 @@ export class ValidatorExceptionFilter extends BaseExceptionFilter implements Exc
         }
     }
 
-    getValidationMessage(validatorMessage, language: string): string {
+    getValidationMessage(validatorMessage: ValidationErrorExceptionMessage, language: string): string {
         let translateMessage = '';
-        let args = {};
-        const key = `validation.${validatorMessage?.message || validatorMessage}`;
+        let args: Record<string, unknown> = {};
+        const isDetail = typeof validatorMessage === 'object';
+        const key = `validation.${isDetail ? validatorMessage.message || validatorMessage : validatorMessage}`;
 
-        if (typeof validatorMessage === 'object') {
-            args = { ...validatorMessage.detail, property: startCase(validatorMessage.detail.property) };
+        if (isDetail) {
+            args = { ...validatorMessage.detail, property: startCase(validatorMessage.detail.property ?? '') };
         }
 
-        if (typeof validatorMessage === 'object' && validatorMessage.message.startsWith('each value in')) {
+        if (isDetail && validatorMessage.message.startsWith('each value in')) {
             translateMessage += trans('each value in', { lang: language });
             translateMessage += ' ';
             validatorMessage.message = validatorMessage.message.replace('each value in ', '');

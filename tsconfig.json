@@ -3,6 +3,8 @@
         "module": "nodenext",
         "moduleResolution": "nodenext",
         "target": "es2023",
+        "strictPropertyInitialization": false,
+        "types": ["node"],
         "lib": ["es2023"],
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -14,7 +16,6 @@
         "skipLibCheck": true,
         "rootDir": "./",
         "outDir": "dist",
-        "baseUrl": "./",
         "incremental": true
     },
     "include": ["lib"],

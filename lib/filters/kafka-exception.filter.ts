@@ -10,7 +10,7 @@ export class KafkaExceptionFilter extends HttpExceptionFilter {
         host: ArgumentsHost,
         code: number,
         message: string,
-        errors: string | object = null
+        errors: string | object | null = null
     ): Observable<never> {
         return throwError(() =>
             JSON.stringify({
