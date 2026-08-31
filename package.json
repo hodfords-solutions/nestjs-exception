@@ -1,6 +1,6 @@
 {
     "name": "@hodfords/nestjs-exception",
-    "version": "12.1.0",
+    "version": "12.2.0",
     "description": "A NestJS module for handling and customizing exceptions with ease.",
     "type": "module",
     "main": "./index.js",
@@ -68,6 +68,12 @@
         "typescript": "6.0.3",
         "unplugin-swc": "^1.5.7",
         "vitest": "^4.1.10"
+    },
+    "peerDependencies": {
+        "@hodfords/nestjs-cls-translation": ">=12.0.0",
+        "@nestjs/common": ">=12.0.0",
+        "rxjs": ">=7.0.0",
+        "typeorm": ">=1.0.0"
     },
     "overrides": {
         "nestjs-cls": {
